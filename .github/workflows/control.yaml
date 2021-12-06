@@ -9,7 +9,7 @@ on:
   push:
     branches: [ master ]
     paths:
-    - 'value/**'
+    - 'control/**'
 
 
 env:
