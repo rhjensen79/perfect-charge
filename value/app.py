@@ -6,17 +6,29 @@ import pandas as pd
 
 # Set environment variables
 barry_token = os.getenv('BARRY_TOKEN')
+barry_meter_id = os.getenv('BARRY_METER_ID')
+
 barry_token = "Bearer "+ barry_token
 url = "https://jsonrpc.barry.energy/json-rpc#get-spot-price"
+
+api_date_format = '%Y-%m-%dT%H:%M:%SZ'
+now = datetime.datetime.now()
+later = (datetime.timedelta(hours = 5)) + now
+
+# Calculate start and end times
+start_time = (now.strftime("%Y")+"-"+now.strftime("%m")+"-"+now.strftime("%d")+"T"+now.strftime("%H")+":00:00Z")
+end_time = (later.strftime("%Y")+"-"+later.strftime("%m")+"-"+later.strftime("%d")+"T"+later.strftime("%H")+":00:00Z")
+# TODO : Fix error when time = 00:00 
+
 
 payload = json.dumps({
   "method": "co.getbarry.api.v1.OpenApiController.getTotalHourlyPrice",
   "id": 0,
   "jsonrpc": "2.0",
   "params": [
-    "571313174113783269",
-    "2021-12-06T00:00:00Z",
-    "2021-12-06T01:00:00Z"
+    barry_meter_id,
+    start_time,
+    end_time
   ]
 })
 
@@ -26,6 +38,8 @@ headers = {
 }
 
 while __name__ == "__main__":
+    
+    # Get the data from the API
     response = requests.request("POST", url, headers=headers, data=payload)
 
     df = json.loads(response.text)    
