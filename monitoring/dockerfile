@@ -1,3 +1,0 @@
-FROM telegraf:1.20.4
-LABEL maintainer="Robert Jensen - robert@robert-jensen.dk"
-COPY ./telegraf.conf /etc/telegraf/telegraf.conf:ro
