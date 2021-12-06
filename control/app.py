@@ -1,3 +1,3 @@
 import os
 
-print ("Hello World from Control app")
+print ("Hello World From Control app")
