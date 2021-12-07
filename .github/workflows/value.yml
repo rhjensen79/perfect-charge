@@ -52,23 +52,33 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Apply the new tag to the image
-        uses: mark-hartmann/update-deployment-action@develop
-        with:
-          tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
-          name: value
-          deployment: ./k8s-deployment.yaml
-      - name: Commit files
-        run: |
-          cat ./k8s-deployment.yaml
-          sed -i "s|image: ghcr.io/rhjensen79/perfect-charge/value.*|image: ghcr.io/rhjensen79/perfect-charge/value:sha-${{ github.sha }}|g" k8s-deployment.yaml
-          cat ./k8s-deployment.yaml
-          git config --local user.email "robert@robert-jensen.dk"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+
+  update-repo:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Create local changes
+      run: |
+        sed -i "s|image: ghcr.io/rhjensen79/perfect-charge/value.*|image: ghcr.io/rhjensen79/perfect-charge/value:sha-${{ github.sha }}|g" k8s-deployment.yaml
+    - name: Commit & Push changes
+      uses: actions-js/push@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+     # - name: Commit files
+     #   run: |
+     #     sed -i "s|image: ghcr.io/rhjensen79/perfect-charge/value.*|image: ghcr.io/rhjensen79/perfect-charge/value:sha-${{ github.sha }}|g" k8s-deployment.yaml
+     #     git config --local user.email "robert@robert-jensen.dk"
+     #     git config --local user.name "github-actions[bot]"
+     #     git commit -m "Changed image tag" -a
+     # - name: Push changes
+     #   uses: ad-m/github-push-action@master
+     #   with:
+     #     github_token: ${{ secrets.GITHUB_TOKEN }}
+     #     branch: ${{ github.ref }}
   
