@@ -21,3 +21,6 @@ BARRY_TOKEN
 ### Control
 
 ### Monitoring
+
+
+sed -i "s|image: ghcr.io/rhjensen79/perfect-charge/value|image: ghcr.io/rhjensen79/perfect-charge/value:latest|" k8s-deployment.yaml

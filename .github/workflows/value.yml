@@ -51,21 +51,17 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-  
-  updateDeployment:
-    needs: build-and-push-image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout master-repository
-        uses: actions/checkout@v2
+
       - name: Apply the new tag to the image
         uses: mark-hartmann/update-deployment-action@develop
         with:
-          tag: sha-${{ github.sha }}
+          tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
           name: value
-          deployment: k8s-deployment.yaml
+          deployment: ./k8s-deployment.yaml
       - name: Commit files
         run: |
+          cat ./k8s-deployment.yaml
+          sed -i "s|image: ghcr.io/rhjensen79/perfect-charge/value.*|image: ghcr.io/rhjensen79/perfect-charge/value:sha-${{ github.sha }}|g" k8s-deployment.yaml
           cat ./k8s-deployment.yaml
           git config --local user.email "robert@robert-jensen.dk"
           git config --local user.name "github-actions[bot]"
@@ -75,3 +71,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+  
