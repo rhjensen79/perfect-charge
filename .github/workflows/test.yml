@@ -28,5 +28,5 @@ jobs:
     - name: Build the Docker image
       run: |
         cd value
-        docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
-        docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
+        docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:master
+        docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:master
