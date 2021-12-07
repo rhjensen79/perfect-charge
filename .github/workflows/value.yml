@@ -57,12 +57,12 @@ jobs:
         with:
           tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
           name: value
-          deployment: k8s-deployment.yaml
+          deployment: ./k8s-deployment.yaml
       - name: Commit files
         run: |
+          cat ./k8s-deployment.yaml
           git config --local user.email "robert@robert-jensen.dk"
           git config --local user.name "github-actions[bot]"
-          git add .
           git commit -m "Add changes" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
