@@ -17,7 +17,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}/value:${git_hash}
+  IMAGE_NAME: ${{ github.repository }}/value
 
 
 jobs:
@@ -56,7 +56,7 @@ jobs:
         with:
           context: ./value
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: testtag
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Apply the new tag to the image
