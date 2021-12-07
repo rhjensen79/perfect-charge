@@ -10,6 +10,7 @@ on:
     branches: [ master ]
     paths:
     - 'value/**'
+  workflow_dispatch:
 
 
 env:
@@ -59,6 +60,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   updateDeployment:
+      needs: build
       runs-on: ubuntu-latest
       steps:
         - name: Checkout master-repository
