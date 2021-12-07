@@ -11,8 +11,8 @@ spec:
         spec:
           containers:
             - name: value
-              image: ghcr.io/rhjensen79/perfect-charge/value:master
-              imagePullPolicy: IfNotPresent
+              image: ghcr.io/rhjensen79/perfect-charge/value:latest
+              imagePullPolicy: Always
               command:
                 - /bin/sh
                 - -c
