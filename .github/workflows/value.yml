@@ -42,6 +42,7 @@ jobs:
           tags: |
             type=raw,value=latest
             type=sha
+            type=sha,format=long
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -54,6 +55,6 @@ jobs:
       - name: Apply the new tag to the image
         uses: mark-hartmann/update-deployment-action@develop
         with:
-          tag: ${{ github.sha }} # refs/tags/ gets automatically removed
+          tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
           name: value
           deployment: k8s-deployment.yaml
