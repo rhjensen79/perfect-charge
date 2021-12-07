@@ -3,11 +3,13 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Create and publish a Docker image
+name: Value Container
 
 on:
   push:
     branches: ['master']
+    paths:
+    - 'value/**'
   workflow_dispatch:
 
 env:
