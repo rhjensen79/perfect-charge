@@ -1,5 +1,6 @@
 FROM python:3.9-alpine3.15
 LABEL maintainer="Robert Jensen - Robert@robert-jensen.dk"
+LABEL org.opencontainers.image.version="0.0.1"
 WORKDIR /usr/src/app
 COPY . ./
 RUN pip install --no-cache-dir -r requirements.txt
