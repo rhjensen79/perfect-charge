@@ -10,8 +10,8 @@ spec:
       template:
         spec:
           containers:
-          - name: hello
-            image: busybox
+          - name: value
+            image: ghcr.io/rhjensen79/perfect-charge/value:master
             imagePullPolicy: IfNotPresent
             command:
             - /bin/sh

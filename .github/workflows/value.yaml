@@ -21,7 +21,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -58,3 +57,15 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  updateDeployment:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout master-repository
+          uses: actions/checkout@v2
+        - name: Apply the new tag to the image
+          uses: mark-hartmann/update-deployment-action@develop
+          with:
+            tag: ${{ github.event.client_payload.ref }} # refs/tags/ gets automatically removed
+            name: value
+            deployment: k8s-deployment.yaml
