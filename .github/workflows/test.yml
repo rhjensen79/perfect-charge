@@ -12,4 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file ./value/Dockerfile --tag test:$(date +%s)
+      run: |
+        cd value
+        docker build . --file Dockerfile --tag test:$(date +%s)
