@@ -13,7 +13,7 @@ url = "https://jsonrpc.barry.energy/json-rpc#get-spot-price"
 
 api_date_format = '%Y-%m-%dT%H:%M:%SZ'
 now = datetime.datetime.now()
-later = (datetime.timedelta(hours = 5)) + now
+later = (datetime.timedelta(hours = 12)) + now
 
 # Calculate start and end times
 start_time = (now.strftime("%Y")+"-"+now.strftime("%m")+"-"+now.strftime("%d")+"T"+now.strftime("%H")+":00:00Z")

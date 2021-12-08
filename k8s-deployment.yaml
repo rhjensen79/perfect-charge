@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: test
+  name: value
   namespace: perfect-charge
 spec:
   schedule: "*/1 * * * *"
@@ -17,5 +17,17 @@ spec:
                 - /bin/sh
                 - -c
                 - date; echo Hello from the Kubernetes cluster
+              env:
+                - name: BARRY_METER_ID
+                  valueFrom:
+                    secretKeyRef: 
+                      name: barry
+                      key: barry_meter_id
+                - name: BARRY_TOKEN
+                  valueFrom:
+                      secretKeyRef:
+                        name: barry
+                        key: barry_token
+
           restartPolicy: OnFailure
 
