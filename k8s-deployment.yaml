@@ -28,6 +28,8 @@ spec:
                       secretKeyRef:
                         name: barry
                         key: barry_token
+          imagePullSecrets:
+            - name: regcred
 
           restartPolicy: OnFailure
 
