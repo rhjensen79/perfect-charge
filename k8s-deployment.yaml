@@ -27,10 +27,12 @@ spec:
             - name: value
               image: ghcr.io/rhjensen79/perfect-charge/value:latest
               imagePullPolicy: Always
-#              command:
-#                - /bin/sh
-#                - -c
-#                - python3 app.py
+              command:
+                - /bin/sh
+                - -c
+                - ls
+                - mkdir data
+                - ls
               env:
                 - name: BARRY_METER_ID
                   valueFrom:
@@ -43,12 +45,11 @@ spec:
                         name: barry
                         key: barry_token
               volumeMounts:
-                - mountPath: "/usr/src/app"
+                - mountPath: /src/app/data
                   name: data
           volumes:
             - name: data
-              persistentVolumeClaim:
-                claimName: perfect-charge-data
+              emptyDir: {}
           imagePullSecrets:
             - name: regcred
 
