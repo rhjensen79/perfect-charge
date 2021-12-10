@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: value
+  name: perfect-charge
   namespace: perfect-charge
 spec:
   #schedule: "5 * * * *"
@@ -32,6 +32,8 @@ spec:
               volumeMounts:
                 - mountPath: /src/app/data
                   name: data
+
+
           volumes:
             - name: data
               emptyDir: {}
