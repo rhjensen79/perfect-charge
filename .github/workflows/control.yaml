@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Control Container
+name: Value Container
 
 on:
   push:

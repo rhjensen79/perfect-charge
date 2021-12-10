@@ -46,6 +46,8 @@ while __name__ == "__main__":
     f = open("data/value.json", "w")
     f.write (response.text)
     f.close()
+
+    # List files in data directory as test during development
     arr = os.listdir('data')
     print ("Files in data directory")
     print (arr)
