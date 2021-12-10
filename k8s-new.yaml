@@ -12,6 +12,14 @@ spec:
       labels:
         app: perfect-charge
     spec:
+
+      volumes:
+        - name: data
+          emptyDir: {}
+          
+      imagePullSecrets:
+        - name: regcred
+
       containers:
       - name: value
         image: ghcr.io/rhjensen79/perfect-charge/value:latest
@@ -49,10 +57,5 @@ spec:
           - mountPath: /src/app/data
             name: data
 
-      volumes:
-        - name: data
-          emptyDir: {}
-      imagePullSecrets:
-        - name: regcred
 
-      restartPolicy: Always
+
