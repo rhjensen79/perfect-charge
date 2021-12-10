@@ -42,14 +42,23 @@ while __name__ == "__main__":
     # Get the data from the API
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    df = json.loads(response.text)    
-    df_nested_list = pd.json_normalize(df, record_path=['result'])
+    print (response.text)
+    f = open("data/value.json", "w")
+    f.write (response.text)
+    f.close()
+
+    #df = json.loads(response.text)    
+    #df_nested_list = pd.json_normalize(df, record_path=['result'])
 
     
-    if (df_nested_list['value'][0]) > 3:
-      print ("Do not charge")
-    else: 
-      print ("Charge")
+    #if (df_nested_list['value'][0]) > 3:
+    #  print ("Do not charge")
+    #else: 
+    #  print ("Charge")
+
+
+   
+  
     exit()
 
     # Test action run 8
