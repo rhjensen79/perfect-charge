@@ -17,7 +17,7 @@ spec:
 #              command:
 #                - /bin/sh
 #                - -c
-#                - ls data
+#                - cat ./data/value.json
               env:
                 - name: BARRY_METER_ID
                   valueFrom:

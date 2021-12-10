@@ -46,6 +46,9 @@ while __name__ == "__main__":
     f = open("data/value.json", "w")
     f.write (response.text)
     f.close()
+    arr = os.listdir('data')
+    print ("Files in data directory")
+    print (arr)
 
     #df = json.loads(response.text)    
     #df_nested_list = pd.json_normalize(df, record_path=['result'])
