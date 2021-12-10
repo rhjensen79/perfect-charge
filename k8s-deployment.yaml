@@ -17,7 +17,8 @@ metadata:
   name: value
   namespace: perfect-charge
 spec:
-  schedule: "5 * * * *"
+  #schedule: "5 * * * *"
+  schedule: "* * * * *" # Only for test
   jobTemplate:
     spec:
       template:
@@ -26,10 +27,10 @@ spec:
             - name: value
               image: ghcr.io/rhjensen79/perfect-charge/value:latest
               imagePullPolicy: Always
-              command:
-                - /bin/sh
-                - -c
-                - date; echo Hello from the Kubernetes cluster
+#              command:
+#                - /bin/sh
+#                - -c
+#                - python3 app.py
               env:
                 - name: BARRY_METER_ID
                   valueFrom:
