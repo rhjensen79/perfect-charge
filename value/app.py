@@ -43,7 +43,7 @@ while __name__ == "__main__":
     response = requests.request("POST", url, headers=headers, data=payload)
 
     print (response.text)
-    f = open("data/value.json", "w")
+    f = open("value.json", "w")
     f.write (response.text)
     f.close()
 

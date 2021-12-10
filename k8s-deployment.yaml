@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: perfect-charge-data
+  namespace: perfect-charge
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -28,6 +41,13 @@ spec:
                       secretKeyRef:
                         name: barry
                         key: barry_token
+              volumeMounts:
+                - mountPath: "/usr/src/app"
+                  name: data
+          volumes:
+            - name: data
+              persistentVolumeClaim:
+                claimName: perfect-charge-data
           imagePullSecrets:
             - name: regcred
 
