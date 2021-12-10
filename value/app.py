@@ -3,6 +3,7 @@ import requests
 import json
 import datetime
 import pandas as pd
+import time
 
 # Set environment variables
 barry_token = os.getenv('BARRY_TOKEN')
@@ -60,10 +61,10 @@ while __name__ == "__main__":
     #  print ("Do not charge")
     #else: 
     #  print ("Charge")
-
+    time.sleep(10)
 
    
   
-    exit()
+    #exit()
 
     # Test action run 8
