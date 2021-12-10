@@ -16,7 +16,7 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
-          
+
       imagePullSecrets:
         - name: regcred
 
@@ -56,6 +56,5 @@ spec:
         volumeMounts:
           - mountPath: /src/app/data
             name: data
-
 
 
