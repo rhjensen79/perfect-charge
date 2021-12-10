@@ -1,3 +1,7 @@
 import os
+import time
 
-print ("Hello World From Control app - test")
+while __name__ == "__main__":
+    print ("Hello World From Control app - test")
+
+    time.sleep(10)

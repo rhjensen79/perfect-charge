@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perfect-charge
+  namespace: perfect-charge
+spec:
+  selector:
+    matchLabels:
+      app: perfect-charge
+  template:
+    metadata:
+      labels:
+        app: perfect-charge
+    spec:
+      containers:
+      - name: value
+        image: ghcr.io/rhjensen79/perfect-charge/value:latest
+        imagePullPolicy: Always
+        env:
+          - name: BARRY_METER_ID
+            valueFrom:
+              secretKeyRef: 
+                name: barry
+                key: barry_meter_id
+          - name: BARRY_TOKEN
+            valueFrom:
+                secretKeyRef:
+                  name: barry
+                  key: barry_token
+        volumeMounts:
+          - mountPath: /src/app/data
+            name: data
+
+      - name: control
+        image: ghcr.io/rhjensen79/perfect-charge/control:latest
+        imagePullPolicy: Always
+        env:
+          - name: BARRY_METER_ID
+            valueFrom:
+              secretKeyRef: 
+                name: barry
+                key: barry_meter_id
+          - name: BARRY_TOKEN
+            valueFrom:
+                secretKeyRef:
+                  name: barry
+                  key: barry_token
+        volumeMounts:
+          - mountPath: /src/app/data
+            name: data
+
+      volumes:
+        - name: data
+          emptyDir: {}
+      imagePullSecrets:
+        - name: regcred
+
+      restartPolicy: Always
