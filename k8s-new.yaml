@@ -38,7 +38,7 @@ spec:
                   key: barry_token
         volumeMounts:
           - name: shared-data
-            mountPath: /src/app/data
+            mountPath: /usr/src/app/data
 
       - name: control
         image: ghcr.io/rhjensen79/perfect-charge/control:latest
@@ -56,4 +56,4 @@ spec:
                   key: barry_token
         volumeMounts:
           - name: shared-data
-            mountPath: /src/app/data
+            mountPath: /usr/src/app/data

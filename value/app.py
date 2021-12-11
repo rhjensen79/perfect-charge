@@ -61,7 +61,7 @@ while __name__ == "__main__":
     #  print ("Do not charge")
     #else: 
     #  print ("Charge")
-    time.sleep(10)
+    time.sleep(300)
 
    
   
