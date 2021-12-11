@@ -14,8 +14,9 @@ spec:
     spec:
 
       volumes:
-        - name: data
-          emptyDir: {}
+      - name: shared-data
+        emptyDir: {}
+          
 
       imagePullSecrets:
         - name: regcred
@@ -36,8 +37,8 @@ spec:
                   name: barry
                   key: barry_token
         volumeMounts:
-          - mountPath: /src/app/data
-            name: data
+          - name: shared-data
+            mountPath: /src/app/data
 
       - name: control
         image: ghcr.io/rhjensen79/perfect-charge/control:latest
@@ -54,7 +55,5 @@ spec:
                   name: barry
                   key: barry_token
         volumeMounts:
-          - mountPath: /src/app/data
-            name: data
-
-
+          - name: shared-data
+            mountPath: /src/app/data
