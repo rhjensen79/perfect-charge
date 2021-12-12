@@ -22,10 +22,10 @@ spec:
       - name: value
         image: ghcr.io/rhjensen79/perfect-charge/value:latest
         imagePullPolicy: Always
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
+        #resources:
+        #  limits:
+        #    memory: "512Mi"
+        #    cpu: "500m"
         env:
           - name: BARRY_METER_ID
             valueFrom:
@@ -44,10 +44,10 @@ spec:
       - name: control
         image: ghcr.io/rhjensen79/perfect-charge/control:latest
         imagePullPolicy: Always
-        resources:
-          limits:
-            memory: "512"
-            cpu: "500m"
+        #resources:
+          #limits:
+          #  memory: "512"
+          #  cpu: "500m"
         volumeMounts:
           - name: shared-data
             mountPath: /usr/src/app/data
