@@ -43,11 +43,10 @@ spec:
         livenessProbe:
           exec:
             command:
-            - /bin/sh
-            - -c
-            - find ./data -mmin -5 -type f -print
-          initialDelaySeconds: 350
-          periodSeconds: 600
+            - python
+            - liveness_probe.py
+          initialDelaySeconds: 60
+          periodSeconds: 300
         volumeMounts:
           - name: shared-data
             mountPath: /usr/src/app/data
