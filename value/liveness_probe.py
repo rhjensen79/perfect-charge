@@ -3,9 +3,8 @@ from datetime import datetime, timedelta
 import sys
 
 
-
-file_name = 'data/file.json'
-file_mod_time = datetime.fromtimestamp(os.stat(file_name).st_mtime)  # This is a datetime.datetime object!
+file_name = 'data/value.json'
+file_mod_time = datetime.fromtimestamp(os.stat(file_name).st_mtime)  
 now = datetime.today()
 max_delay = timedelta(minutes=10)
 
