@@ -64,3 +64,17 @@ spec:
         volumeMounts:
           - name: shared-data
             mountPath: /usr/src/app/data
+
+      - name: log
+        image: ghcr.io/rhjensen79/perfect-charge/log:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+        volumeMounts:
+          - name: shared-data
+            mountPath: /data
