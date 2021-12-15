@@ -61,6 +61,17 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "1000m"
+        env:
+          - name: EASEE_USER
+            valueFrom:
+              secretKeyRef: 
+                name: easee
+                key: easee_user
+          - name: EASEE_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                  name: easee
+                  key: easee_password
         volumeMounts:
           - name: shared-data
             mountPath: /usr/src/app/data
