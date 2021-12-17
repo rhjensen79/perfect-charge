@@ -40,8 +40,8 @@ def control_charger(token, id, command):
 
 
 while __name__ == "__main__":
-    token = (get_token())
-    charger_id = (get_charger(token))
+    #token = (get_token())
+    #charger_id = (get_charger(token))
     #control_charger(token, charger_id, "start")
 
 
