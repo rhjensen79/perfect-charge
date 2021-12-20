@@ -2,3 +2,4 @@ venv
 .vscode
 value.json
 .vscode/settings.json
+.venv
