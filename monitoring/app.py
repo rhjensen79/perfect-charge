@@ -1,5 +1,4 @@
 import streamlit as st
 
-
-while __name__ == "__main__":
-    st.title("Monitoring")
+st.title("Perfect Charge")
+st.write("This is the perfect chart monitoring/Control page")
