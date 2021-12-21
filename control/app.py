@@ -7,15 +7,22 @@ import logging
 def get_token():
     user = os.getenv('EASEE_USER')
     password = os.getenv('EASEE_PASSWORD')
+
     url = "https://api.easee.cloud/api/accounts/token"
     payload = "{\"userName\":\"" + user + "\",\"password\":\"" + password + "\"}"
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/*+json"
         }
-    response = requests.request("POST", url, data=payload, headers=headers)
-    data = json.loads(response.text)
-    return(data["accessToken"])
+    try:
+        response = requests.request("POST", url, data=payload, headers=headers)
+        data = json.loads(response.text)
+        logging.info("---")
+        logging.info("Token recieved")
+        logging.info("---")
+        return(data["accessToken"])
+    except:
+        logging.warning("Error getting token")
 
 
 def get_charger(token):
@@ -24,19 +31,16 @@ def get_charger(token):
     response = requests.request("GET", url, headers=headers)
     data = json.loads(response.text)
     id = data[0]["id"]
+    logging.info("--- Charger ID ---")
+    logging.info(id)
+    logging.info("---------")
     return(id)
 
 def control_charger(token, id, command):
-    if command == "start":
-        command = "start_charging"
-        status = "Started Charging"
-    else:
-        command = "stop_charging"
-        status = "Stopped Charging"
     url = "https://api.easee.cloud/api/chargers/"+ id +"/commands/" + command
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("POST", url, headers=headers)
-    return (status)
+    return (response)
 
 
 
@@ -44,9 +48,9 @@ while __name__ == "__main__":
     # Set logging
     logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
     
-    #token = (get_token())
-    #charger_id = (get_charger(token))
-    #control_charger(token, charger_id, "start")
+    token = (get_token())
+    charger_id = (get_charger(token))
+    print (control_charger(token, charger_id, "state"))
 
 
     try:
