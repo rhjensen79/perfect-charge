@@ -36,12 +36,34 @@ def get_charger(token):
     logging.info("---------")
     return(id)
 
-def control_charger(token, id, command):
+def charger_control(token, id, command):
+    # Commands 
+    # - start_charging
+    # - stop_charging
+    # - pause_charging
+    # - resume_charging
+
     url = "https://api.easee.cloud/api/chargers/"+ id +"/commands/" + command
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("POST", url, headers=headers)
+    logging.info("--- Charger Reponse ---")
+    logging.info(response.text)
+    logging.info("---------")
     return (response)
 
+
+def charger_state(token, id):
+    url = "https://api.easee.cloud/api/chargers/"+ id +"/" + command
+    headers = {"Authorization": "Bearer "+ token}
+    response = requests.request("GET", url, headers=headers)
+    logging.info(response.text)
+
+
+def charger_session(token, id):
+    url = "https://api.easee.cloud/api/chargers/"+ id +"/sessions/ongoing"
+    headers = {"Authorization": "Bearer "+ token}
+    response = requests.request("GET", url, headers=headers)
+    logging.info(response.text)
 
 
 while __name__ == "__main__":
@@ -50,8 +72,9 @@ while __name__ == "__main__":
     
     token = (get_token())
     charger_id = (get_charger(token))
-    print (control_charger(token, charger_id, "state"))
-
+    #charger_control(token, charger_id, "pause_charging")
+    #charger_state(token, charger_id, "state")
+    charger_session(token, charger_id)
 
     try:
         with open ("data/value.json") as jsonfile:
