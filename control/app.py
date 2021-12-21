@@ -45,6 +45,7 @@ def charger_control(token, id, command):
     # - stop_charging
     # - pause_charging
     # - resume_charging
+    # - toggle_charging 
 
     url = "https://api.easee.cloud/api/chargers/"+ id +"/commands/" + command
     headers = {"Authorization": "Bearer "+ token}
@@ -93,13 +94,19 @@ while __name__ == "__main__":
 
             if charger_state(token, charger_id) == 2 or 6:
                 logging.info ("Charger Ready")
-                if value <= chargevalue:
-                    logging.info("Price is right - Starting Charge")
-                    charger_control(token, charger_id, "start_charging")
 
+                if value <= chargevalue:
+                    if charger_state(token, charger_id) == 3:
+                        logging.info("Price is right - But Charging is already in progress")
+                    else:
+                        charger_control(token, charger_id, "toggle_charging")
+                        logging.info("Price is right - Starting charge")
                 else:
-                    logging.info("Price is too high - Pausing Charge")
-                    charger_control(token, charger_id, "pause_charging")
+                    if charger_state(token, charger_id) == 3:
+                        logging.info("Price is too high - Pausing Charge")
+                        charger_control(token, charger_id, "toggle_charging")
+                    else:
+                        logging.info("Price is too high - But charger is already stopped")
             else:
                 logging.info ("Charger not ready")
 
