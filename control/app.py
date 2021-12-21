@@ -95,7 +95,7 @@ while __name__ == "__main__":
                 logging.info ("Charger Ready")
                 if value <= chargevalue:
                     logging.info("Price is right - Starting Charge")
-                    charger_control(token, charger_id, "resume_charging")
+                    charger_control(token, charger_id, "start_charging")
 
                 else:
                     logging.info("Price is too high - Pausing Charge")
