@@ -2,6 +2,7 @@ import os
 import time
 import json
 import requests
+import logging
 
 def get_token():
     user = os.getenv('EASEE_USER')
@@ -54,12 +55,17 @@ while __name__ == "__main__":
             for r in result:
                 value = (r['value'])
                 print ("Current price   : " + str(value))
+                logging.info("Current price   : " + str(value))
+
                 start = (r['start'])
                 print ("Start Time      : " + str(start))
+                logging.info("Start Time      : " + str(start))
+
                 end = (r['end'])
                 print ("End Time        : " + str(end))
+                logging.info("End Time        : " + str(end))
     except:
-        print ("File not found")
+        logging.warning ("File not found")
 
 
     time.sleep(60)
