@@ -91,18 +91,20 @@ while __name__ == "__main__":
                 end = (r['end'])
                 logging.info("End Time        : " + str(end))
 
+            # Get Charger state
+            chargerstate = charger_state(token, charger_id)
 
-            if charger_state(token, charger_id) == 2 or 6:
+            if chargerstate == 2 or 6:
                 logging.info ("Charger Ready")
 
                 if value <= chargevalue:
-                    if charger_state(token, charger_id) == 3:
+                    if chargerstate == 3:
                         logging.info("Price is right - But Charging is already in progress")
                     else:
                         charger_control(token, charger_id, "toggle_charging")
                         logging.info("Price is right - Starting charge")
                 else:
-                    if charger_state(token, charger_id) == 3:
+                    if chargerstate == 3:
                         logging.info("Price is too high - Pausing Charge")
                         charger_control(token, charger_id, "toggle_charging")
                     else:
