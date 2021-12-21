@@ -4,6 +4,7 @@ import json
 import datetime
 import pandas as pd
 import time
+import logging
 
 # Set environment variables
 barry_token = os.getenv('BARRY_TOKEN')
@@ -13,7 +14,9 @@ barry_token = "Bearer "+ barry_token
 url = "https://jsonrpc.barry.energy/json-rpc#get-spot-price"
 
 while __name__ == "__main__":
-
+    # Set logging
+    logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
+    
     api_date_format = '%Y-%m-%dT%H:%M:%SZ'
     now = datetime.datetime.now()
     later = (datetime.timedelta(hours = 1)) + now
@@ -50,13 +53,10 @@ while __name__ == "__main__":
 
     # List files in data directory as test during development
     arr = os.listdir('data')
-    print ("Files in data directory")
-    print (arr)
+    logging.info ("Files in data directory")
+    logging.info (arr)
 
     time.sleep(300)
 
    
-  
     #exit()
-
-    # Test action run 8

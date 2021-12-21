@@ -41,7 +41,9 @@ def control_charger(token, id, command):
 
 
 while __name__ == "__main__":
-    logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
+    # Set logging
+    logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
+    
     #token = (get_token())
     #charger_id = (get_charger(token))
     #control_charger(token, charger_id, "start")
@@ -55,15 +57,12 @@ while __name__ == "__main__":
 
             for r in result:
                 value = (r['value'])
-                print ("Current price   : " + str(value))
                 logging.info("Current price   : " + str(value))
 
                 start = (r['start'])
-                print ("Start Time      : " + str(start))
                 logging.info("Start Time      : " + str(start))
 
                 end = (r['end'])
-                print ("End Time        : " + str(end))
                 logging.info("End Time        : " + str(end))
     except:
         logging.warning ("File not found")
