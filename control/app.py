@@ -4,6 +4,8 @@ import json
 import requests
 import logging
 
+chargevalue = 5.4
+
 def get_token():
     user = os.getenv('EASEE_USER')
     password = os.getenv('EASEE_PASSWORD')
@@ -36,6 +38,7 @@ def get_charger(token):
     logging.info("---------")
     return(id)
 
+
 def charger_control(token, id, command):
     # Commands 
     # - start_charging
@@ -53,17 +56,17 @@ def charger_control(token, id, command):
 
 
 def charger_state(token, id):
-    url = "https://api.easee.cloud/api/chargers/"+ id +"/" + command
+    url = "https://api.easee.cloud/api/chargers/"+ id +"/state"
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("GET", url, headers=headers)
-    logging.info(response.text)
+    data = json.loads(response.text)
+    chargerOpMode = data["chargerOpMode"]
+    totalPower = data["totalPower"]
+    logging.info("--- chargerOpMode ---")
+    logging.info(chargerOpMode)
+    logging.info("---------")
+    return (chargerOpMode)
 
-
-def charger_session(token, id):
-    url = "https://api.easee.cloud/api/chargers/"+ id +"/sessions/ongoing"
-    headers = {"Authorization": "Bearer "+ token}
-    response = requests.request("GET", url, headers=headers)
-    logging.info(response.text)
 
 
 while __name__ == "__main__":
@@ -72,9 +75,6 @@ while __name__ == "__main__":
     
     token = (get_token())
     charger_id = (get_charger(token))
-    #charger_control(token, charger_id, "pause_charging")
-    #charger_state(token, charger_id, "state")
-    charger_session(token, charger_id)
 
     try:
         with open ("data/value.json") as jsonfile:
@@ -85,14 +85,25 @@ while __name__ == "__main__":
             for r in result:
                 value = (r['value'])
                 logging.info("Current price   : " + str(value))
-
                 start = (r['start'])
                 logging.info("Start Time      : " + str(start))
-
                 end = (r['end'])
                 logging.info("End Time        : " + str(end))
+
+
+            if charger_state(token, charger_id) == 2 or 6:
+                logging.info ("Charger Ready")
+                if value <= chargevalue:
+                    logging.info("Price is right - Starting Charge")
+                    charger_control(token, charger_id, "resume_charging")
+
+                else:
+                    logging.info("Price is too high - Pausing Charge")
+                    charger_control(token, charger_id, "pause_charging")
+            else:
+                logging.info ("Charger not ready")
+
     except:
         logging.warning ("File not found")
 
-
-    time.sleep(60)
+    time.sleep(300)
