@@ -4,8 +4,10 @@ import json
 import requests
 import logging
 
+# Set threshold for when to shart charging
 chargevalue = 5.4
 
+# Get token
 def get_token():
     user = os.getenv('EASEE_USER')
     password = os.getenv('EASEE_PASSWORD')
@@ -26,7 +28,7 @@ def get_token():
     except:
         logging.warning("Error getting token")
 
-
+# Get charger id
 def get_charger(token):
     url = "https://api.easee.cloud/api/chargers"
     headers = {"Authorization": "Bearer "+ token}
@@ -39,14 +41,8 @@ def get_charger(token):
     return(id)
 
 
+# Set/Toggle the stete of the charger
 def charger_control(token, id, command):
-    # Commands 
-    # - start_charging
-    # - stop_charging
-    # - pause_charging
-    # - resume_charging
-    # - toggle_charging 
-
     url = "https://api.easee.cloud/api/chargers/"+ id +"/commands/" + command
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("POST", url, headers=headers)
@@ -56,13 +52,13 @@ def charger_control(token, id, command):
     return (response)
 
 
+# Get the charging/connected state of the charger
 def charger_state(token, id):
     url = "https://api.easee.cloud/api/chargers/"+ id +"/state"
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("GET", url, headers=headers)
     data = json.loads(response.text)
     chargerOpMode = data["chargerOpMode"]
-    totalPower = data["totalPower"]
     logging.info("--- chargerOpMode ---")
     logging.info(chargerOpMode)
     logging.info("---------")
@@ -71,12 +67,15 @@ def charger_state(token, id):
 
 
 while __name__ == "__main__":
-    # Set logging
+    # Set logging Config
     logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
     
+    # Get token
     token = (get_token())
+    # Get Charger ID
     charger_id = (get_charger(token))
 
+    # Open file and read latest value data
     try:
         with open ("data/value.json") as jsonfile:
             jsonObject = json.load(jsonfile)
@@ -115,4 +114,5 @@ while __name__ == "__main__":
     except:
         logging.warning ("File not found")
 
+    # Wait 5 minutes for next run
     time.sleep(300)
