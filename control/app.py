@@ -115,7 +115,7 @@ while __name__ == "__main__":
                         charger_control(token, charger_id, "toggle_charging")
                         logging.info("Price is right - Starting charge")
                         chargestatus = 1
-                else:
+                elif value > chargevalue:
                     if chargerstate == 3:
                         logging.info("Price is too high - Pausing Charge")
                         charger_control(token, charger_id, "toggle_charging")
