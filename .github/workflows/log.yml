@@ -14,6 +14,7 @@ on:
 
 concurrency: 
   group: perfect-charge
+  cancel-in-progress: false
 
 env:
   REGISTRY: ghcr.io
