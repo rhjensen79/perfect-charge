@@ -87,4 +87,15 @@ spec:
           volumeMounts:
             - name: shared-data
               mountPath: /usr/src/app/data
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: perfect-charge-monitoring-service
+  namespace: perfect-charge
+spec:
+  selector:
+    app: monitoring
+  ports:
+  - port: 80
+    targetPort: 80
