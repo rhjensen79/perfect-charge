@@ -61,3 +61,33 @@ jobs:
 
       - name: see deployment yaml
         run: cat k8s-new.yaml
+
+  update-deployment:
+    runs-on: ubuntu-latest
+    needs: build-and-push-image
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+
+    - name: Apply the new tag to the image
+      uses: mark-hartmann/update-deployment-action@develop
+      with:
+        tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
+        name: log
+        deployment: k8s-new.yaml
+
+    - name: see deployment yaml
+      run: cat k8s-new.yaml
+
+    - name: Commit files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "Add changes" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
