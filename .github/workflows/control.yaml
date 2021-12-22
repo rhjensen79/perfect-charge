@@ -55,7 +55,7 @@ jobs:
       - name: Apply the new tag to the image
         uses: mark-hartmann/update-deployment-action@develop
         with:
-          tag: ${{ github.sha }} # refs/tags/ gets automatically removed
+          tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
           name: control
           deployment: k8s-new.yaml
 
