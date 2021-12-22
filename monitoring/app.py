@@ -14,8 +14,6 @@ try:
                 jsonfile.close()
                 for d in data:
                     chargevalue = (d['chargevalue'])
-                #chargevalue = float(chargevalue)
-                #print (chargevalue)
 except:
     chargevalue = 3.0
 
