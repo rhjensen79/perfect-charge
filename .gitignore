@@ -5,3 +5,4 @@ control.json
 monitoring.json
 .vscode/settings.json
 .venv
+__pycache__
