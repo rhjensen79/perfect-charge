@@ -12,10 +12,6 @@ on:
     - 'value/**'
   workflow_dispatch:
 
-concurrency: 
-  group: perfect-charge
-  cancel-in-progress: false
-
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/value
