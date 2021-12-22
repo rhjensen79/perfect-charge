@@ -115,21 +115,3 @@ spec:
     name: letsencrypt
     kind: ClusterIssuer
     group: cert-manager.io
----
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
-metadata:
-  name: perfect-charge-https
-  namespace: perfect-charge
-spec:
-  virtualhost:
-    fqdn: pc.robert-jensen.dk
-    tls:
-      #passthrough: true
-      secretName: tls-cert-pc-robert-jensen
-  routes:
-    - conditions:
-      - prefix: /
-      services:
-        - name: perfect-charge-monitoring-service
-          port: 80
