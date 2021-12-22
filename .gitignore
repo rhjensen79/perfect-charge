@@ -1,6 +1,7 @@
 venv
 .vscode
 value.json
+control.json
+monitoring.json
 .vscode/settings.json
 .venv
-control.json
