@@ -52,3 +52,12 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           
+      - name: Apply the new tag to the image
+        uses: mark-hartmann/update-deployment-action@develop
+        with:
+          tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
+          name: value
+          deployment: k8s-new.yaml
+
+      - name: see deployment yaml
+        run: cat k8s-new.yaml
