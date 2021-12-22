@@ -96,8 +96,8 @@ while __name__ == "__main__":
 
             # Get Charger state
             chargerstate = charger_state(token, charger_id)
-
-            if chargerstate == 2 or 6:
+            print (chargerstate)
+            if chargerstate == 2 or chargerstate == 6:
                 logging.info ("Charger Ready")
 
                 if value <= chargevalue:
@@ -116,6 +116,11 @@ while __name__ == "__main__":
                     else:
                         logging.info("Price is too high - But charger is already stopped")
                         chargestatus = 0
+            
+            elif chargerstate == 1:
+                logging.info("Charger Disconnected")
+                chargestatus = 0
+            
             else:
                 logging.info ("Charger not ready")
                 chargestatus = 0

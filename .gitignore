@@ -3,3 +3,4 @@ venv
 value.json
 .vscode/settings.json
 .venv
+control.json
