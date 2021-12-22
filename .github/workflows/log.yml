@@ -66,10 +66,10 @@ jobs:
       with:
         tag: sha-${{ github.sha }} # refs/tags/ gets automatically removed
         name: log
-        deployment: k8s-new.yaml
+        deployment: k8s/perfect-charge.yaml
 
     - name: see deployment yaml
-      run: cat k8s-new.yaml
+      run: cat k8s/perfect-charge.yaml
 
     - name: Commit files
       run: |
