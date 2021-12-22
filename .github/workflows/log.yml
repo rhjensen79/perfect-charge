@@ -55,7 +55,7 @@ jobs:
 
           
 
-  Update deployment:
+  update-deployment:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
