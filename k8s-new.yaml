@@ -74,7 +74,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: log
-          image: ghcr.io/rhjensen79/perfect-charge/log:sha-5fca093b2a048cd221831cdf4c1d850f6f540284
+          image: ghcr.io/rhjensen79/perfect-charge/log:sha-de82963787c8e7b73e0db928dd05d3ded6b25cc1
           imagePullPolicy: Always
           resources:
             requests:
