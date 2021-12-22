@@ -104,7 +104,7 @@ while __name__ == "__main__":
             # Get Charger state
             chargerstate = charger_state(token, charger_id)
             print (chargerstate)
-            if chargerstate == 2 or chargerstate == 6:
+            if chargerstate == 2 or chargerstate == 6 or chargerstate == 3:
                 logging.info ("Charger Ready")
 
                 if value <= chargevalue:
