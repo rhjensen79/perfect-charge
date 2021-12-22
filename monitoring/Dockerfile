@@ -6,4 +6,5 @@ COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt && \
     mkdir -p .streamlit && \
     mv config.toml .streamlit
-CMD [ "/bin/bash -c", "streamlit run app.py" ]
+ENTRYPOINT ["streamlit", "run"]
+CMD ["app.py"]
