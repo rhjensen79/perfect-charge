@@ -77,4 +77,14 @@ spec:
           volumeMounts:
             - name: shared-data
               mountPath: /data
+        - name: monitoring
+          image: ghcr.io/rhjensen79/perfect-charge/monitoring:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 0.1m
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/src/app/data
 
