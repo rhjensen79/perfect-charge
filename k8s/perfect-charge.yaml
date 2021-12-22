@@ -78,7 +78,7 @@ spec:
             - name: shared-data
               mountPath: /data
         - name: monitoring
-          image: ghcr.io/rhjensen79/perfect-charge/monitoring:sha-97e3daff2f988a7b8226cf1ad6f52c3fd9440b54
+          image: ghcr.io/rhjensen79/perfect-charge/monitoring:sha-b262468a410ee03a630d466b04a257f7a1b63e13
           imagePullPolicy: Always
           resources:
             requests:
