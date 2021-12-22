@@ -147,8 +147,7 @@ while __name__ == "__main__":
         'chargerstate': chargerstate,
         'price': value,
         'start': start,
-        'end': end,
-        'chargevalue': chargevalue
+        'end': end
     })
     with open("data/control.json", "w") as f:
         json.dump(controldata, f)
