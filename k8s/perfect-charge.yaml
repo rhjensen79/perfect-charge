@@ -14,7 +14,8 @@ spec:
     spec:
       volumes:
         - name: shared-data
-          emptyDir: {}
+          persistentVolumeClaim:
+          claimName: perfect-charge-pvc
       imagePullSecrets:
         - name: regcred
       containers:
