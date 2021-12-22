@@ -25,9 +25,6 @@ spec:
             requests:
               memory: 256Mi
               cpu: 250m
-            limits:
-              memory: 512Mi
-              cpu: 1000m
           env:
             - name: BARRY_METER_ID
               valueFrom:
@@ -56,9 +53,6 @@ spec:
             requests:
               memory: 256Mi
               cpu: 250m
-            limits:
-              memory: 512Mi
-              cpu: 1000m
           env:
             - name: EASEE_USER
               valueFrom:
@@ -80,9 +74,6 @@ spec:
             requests:
               memory: 256Mi
               cpu: 250m
-            limits:
-              memory: 512Mi
-              cpu: 1000m
           volumeMounts:
             - name: shared-data
               mountPath: /data
