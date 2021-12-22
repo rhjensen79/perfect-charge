@@ -7,6 +7,10 @@ import logging
 # Set threshold for when to shart charging
 chargevalue = 5.4
 
+chargestatus = 0
+controldata = {}
+
+
 # Get token
 def get_token():
     user = os.getenv('EASEE_USER')
@@ -99,20 +103,41 @@ while __name__ == "__main__":
                 if value <= chargevalue:
                     if chargerstate == 3:
                         logging.info("Price is right - But Charging is already in progress")
+                        chargestatus = 1
                     else:
                         charger_control(token, charger_id, "toggle_charging")
                         logging.info("Price is right - Starting charge")
+                        chargestatus = 1
                 else:
                     if chargerstate == 3:
                         logging.info("Price is too high - Pausing Charge")
                         charger_control(token, charger_id, "toggle_charging")
+                        chargestatus = 0
                     else:
                         logging.info("Price is too high - But charger is already stopped")
+                        chargestatus = 0
             else:
                 logging.info ("Charger not ready")
+                chargestatus = 0
 
     except:
         logging.warning ("File not found")
+
+
+    # Get all variables and save them in file
+    controldata['data'] = []
+    controldata['data'].append({
+        'chargestatus': chargestatus,
+        'chargerstate': chargerstate,
+        'price': value,
+        'start': start,
+        'end': end,
+        'chargevalue': chargevalue
+    })
+    with open("data/control.json", "w") as f:
+        json.dump(controldata, f)
+    f.close()
+
 
     # Wait 5 minutes for next run
     time.sleep(300)
