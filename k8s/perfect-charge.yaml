@@ -47,7 +47,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: control
-          image: ghcr.io/rhjensen79/perfect-charge/control:sha-3570faa102febac12d562a4196b254a3bc9adc46
+          image: ghcr.io/rhjensen79/perfect-charge/control:sha-2b66fe3e7f6752bc3eadd808c02969b98919faa1
           imagePullPolicy: Always
           resources:
             requests:
@@ -97,8 +97,8 @@ spec:
   selector:
     app: monitoring
   ports:
-  - port: 80
-    targetPort: 80
+    - port: 80
+      targetPort: 80
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -110,8 +110,9 @@ spec:
   privateKey:
     rotationPolicy: Always
   dnsNames:
-  - pc.robert-jensen.dk
+    - pc.robert-jensen.dk
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
     group: cert-manager.io
+
