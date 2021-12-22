@@ -4,8 +4,6 @@ import json
 import requests
 import logging
 
-# Set threshold for when to shart charging
-chargevalue = 5.4
 
 chargestatus = 0
 controldata = {}
@@ -25,9 +23,7 @@ def get_token():
     try:
         response = requests.request("POST", url, data=payload, headers=headers)
         data = json.loads(response.text)
-        logging.info("---")
-        logging.info("Token recieved")
-        logging.info("---")
+        logging.info("--- Token recieved ---")
         return(data["accessToken"])
     except:
         logging.warning("Error getting token")
@@ -41,7 +37,6 @@ def get_charger(token):
     id = data[0]["id"]
     logging.info("--- Charger ID ---")
     logging.info(id)
-    logging.info("---------")
     return(id)
 
 
@@ -52,7 +47,6 @@ def charger_control(token, id, command):
     response = requests.request("POST", url, headers=headers)
     logging.info("--- Charger Reponse ---")
     logging.info(response.text)
-    logging.info("---------")
     return (response)
 
 
@@ -65,7 +59,6 @@ def charger_state(token, id):
     chargerOpMode = data["chargerOpMode"]
     logging.info("--- chargerOpMode ---")
     logging.info(chargerOpMode)
-    logging.info("---------")
     return (chargerOpMode)
 
 
@@ -74,6 +67,19 @@ while __name__ == "__main__":
     # Set logging Config
     logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
     
+    # Get chargevalue
+    try:
+        with open ("data/monitoring.json") as jsonfile:
+                    jsonObject = json.load(jsonfile)
+                    data = jsonObject['data']
+                    jsonfile.close()
+                    for d in data:
+                        chargevalue = (d['chargevalue'])
+                    logging.info("--- chargevalue ---")
+                    logging.info(chargevalue)
+    except:
+        chargevalue = 3.0
+
     # Get token
     token = (get_token())
     # Get Charger ID
@@ -150,5 +156,3 @@ while __name__ == "__main__":
 
     # Wait 5 minutes for next run
     time.sleep(300)
-
-# Test build
