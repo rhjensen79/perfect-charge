@@ -62,3 +62,11 @@ jobs:
       - name: see deployment yaml
         run: cat k8s-new.yaml
           
+      - name: Commit deployment yaml
+        run: |
+          git config --local user.email "robert@robert-jensen.dk"
+          git config --local user.name "GitHub Action"
+          git add k8s-new.yaml
+          git commit -m "Updated deployment yaml"
+      - name: Push changes # push the output folder to your repo
+        uses: ad-m/github-push-action@master
