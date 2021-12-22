@@ -14,12 +14,14 @@ try:
                 jsonfile.close()
                 for d in data:
                     chargevalue = (d['chargevalue'])
-
+                #chargevalue = float(chargevalue)
+                #print (chargevalue)
 except:
     chargevalue = 3.0
 
+print (chargevalue)
 # Get Chargevalue input
-chargevalue = st.text_input("Charging will happen at this price or below : ",chargevalue)
+chargevalue = st.number_input("Charging will happen at this price or below : ",chargevalue)
 
 # Get all variables and save them in file
 
