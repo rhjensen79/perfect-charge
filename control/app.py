@@ -137,7 +137,7 @@ while __name__ == "__main__":
                 chargestatus = 0
 
     except:
-        logging.warning ("File not found")
+        logging.warning ("File not found!!!")
 
 
     # Get all variables and save them in file
