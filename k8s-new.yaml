@@ -13,79 +13,77 @@ spec:
         app: perfect-charge
     spec:
       volumes:
-      - name: shared-data
-        emptyDir: {}
+        - name: shared-data
+          emptyDir: {}
       imagePullSecrets:
         - name: regcred
-
       containers:
-      - name: value
-        image: ghcr.io/rhjensen79/perfect-charge/value:latest
-        imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "1000m"
-        env:
-          - name: BARRY_METER_ID
-            valueFrom:
-              secretKeyRef: 
-                name: barry
-                key: barry_meter_id
-          - name: BARRY_TOKEN
-            valueFrom:
+        - name: value
+          image: ghcr.io/rhjensen79/perfect-charge/value:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+          env:
+            - name: BARRY_METER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: barry
+                  key: barry_meter_id
+            - name: BARRY_TOKEN
+              valueFrom:
                 secretKeyRef:
                   name: barry
                   key: barry_token
-        livenessProbe:
-          exec:
-            command:
-            - python
-            - liveness_probe.py
-          initialDelaySeconds: 60
-          periodSeconds: 300
-        volumeMounts:
-          - name: shared-data
-            mountPath: /usr/src/app/data
-
-      - name: control
-        image: ghcr.io/rhjensen79/perfect-charge/control:latest
-        imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "1000m"
-        env:
-          - name: EASEE_USER
-            valueFrom:
-              secretKeyRef: 
-                name: easee
-                key: easee_user
-          - name: EASEE_PASSWORD
-            valueFrom:
+          livenessProbe:
+            exec:
+              command:
+                - python
+                - liveness_probe.py
+            initialDelaySeconds: 60
+            periodSeconds: 300
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/src/app/data
+        - name: control
+          image: ghcr.io/rhjensen79/perfect-charge/control:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+          env:
+            - name: EASEE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: easee
+                  key: easee_user
+            - name: EASEE_PASSWORD
+              valueFrom:
                 secretKeyRef:
                   name: easee
                   key: easee_password
-        volumeMounts:
-          - name: shared-data
-            mountPath: /usr/src/app/data
+          volumeMounts:
+            - name: shared-data
+              mountPath: /usr/src/app/data
+        - name: log
+          image: ghcr.io/rhjensen79/perfect-charge/log:sha-5fca093b2a048cd221831cdf4c1d850f6f540284
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
 
-      - name: log
-        image: ghcr.io/rhjensen79/perfect-charge/log:latest
-        imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "1000m"
-        volumeMounts:
-          - name: shared-data
-            mountPath: /data
