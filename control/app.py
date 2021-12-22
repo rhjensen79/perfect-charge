@@ -120,6 +120,10 @@ while __name__ == "__main__":
             elif chargerstate == 1:
                 logging.info("Charger Disconnected")
                 chargestatus = 0
+
+            elif chargerstate == 5:
+                logging.warning("Charger Error")
+                chargestatus = 0
             
             else:
                 logging.info ("Charger not ready")
