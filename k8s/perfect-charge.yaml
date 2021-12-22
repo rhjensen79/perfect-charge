@@ -65,6 +65,13 @@ spec:
                 secretKeyRef:
                   name: easee
                   key: easee_password
+          livenessProbe:
+            exec:
+              command:
+                - python
+                - liveness_probe.py
+            initialDelaySeconds: 60
+            periodSeconds: 300
           volumeMounts:
             - name: shared-data
               mountPath: /usr/src/app/data
