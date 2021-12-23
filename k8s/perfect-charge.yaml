@@ -20,7 +20,7 @@ spec:
         - name: regcred
       containers:
         - name: value
-          image: ghcr.io/rhjensen79/perfect-charge/value:sha-d957d0f96e36dbd1ce084c6f7eb69db5044218e7
+          image: ghcr.io/rhjensen79/perfect-charge/value:sha-f798fc5c30d6bb11f548515afab0825da1701b49
           imagePullPolicy: Always
           resources:
             requests:
@@ -48,7 +48,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: control
-          image: ghcr.io/rhjensen79/perfect-charge/control:sha-0b5452398acdeed27fcad69d9625b5a2124edc05
+          image: ghcr.io/rhjensen79/perfect-charge/control:sha-f798fc5c30d6bb11f548515afab0825da1701b49
           imagePullPolicy: Always
           resources:
             requests:
@@ -76,7 +76,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: log
-          image: ghcr.io/rhjensen79/perfect-charge/log:sha-d957d0f96e36dbd1ce084c6f7eb69db5044218e7
+          image: ghcr.io/rhjensen79/perfect-charge/log:sha-f798fc5c30d6bb11f548515afab0825da1701b49
           imagePullPolicy: Always
           resources:
             requests:
@@ -86,7 +86,7 @@ spec:
             - name: shared-data
               mountPath: /data
         - name: monitoring
-          image: ghcr.io/rhjensen79/perfect-charge/monitoring:sha-d957d0f96e36dbd1ce084c6f7eb69db5044218e7
+          image: ghcr.io/rhjensen79/perfect-charge/monitoring:sha-f798fc5c30d6bb11f548515afab0825da1701b49
           imagePullPolicy: Always
           resources:
             requests:
