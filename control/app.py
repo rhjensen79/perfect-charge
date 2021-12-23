@@ -136,7 +136,6 @@ while __name__ == "__main__":
     except:
         logging.warning ("File not found!!!")
 
-
     # Get all variables and save them in file
     controldata['data'] = []
     controldata['data'].append({
