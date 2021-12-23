@@ -4,6 +4,7 @@ metadata:
   name: perfect-charge
   namespace: perfect-charge
 spec:
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: perfect-charge
