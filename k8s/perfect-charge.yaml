@@ -49,7 +49,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: control
-          image: ghcr.io/rhjensen79/perfect-charge/control:sha-a576f935ea05af2baa043a69fca195bc2f10aeef
+          image: ghcr.io/rhjensen79/perfect-charge/control:sha-f8bfa52fef9b9eeb2ff5396171f6f6b8e535561e
           imagePullPolicy: Always
           resources:
             requests:
