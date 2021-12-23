@@ -21,7 +21,7 @@ spec:
         - name: regcred
       containers:
         - name: value
-          image: ghcr.io/rhjensen79/perfect-charge/value:sha-a576f935ea05af2baa043a69fca195bc2f10aeef
+          image: ghcr.io/rhjensen79/perfect-charge/value:sha-e0feef91708517fe58c7c4ba17e6463f6ddf9a97
           imagePullPolicy: Always
           resources:
             requests:
