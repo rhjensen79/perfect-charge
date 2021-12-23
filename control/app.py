@@ -104,38 +104,35 @@ while __name__ == "__main__":
             # Get Charger state
             chargerstate = charger_state(token, charger_id)
             print (chargerstate)
-            if chargerstate == 2 or chargerstate == 6 or chargerstate == 3:
-                logging.info ("Charger Ready")
-
-                if value <= chargevalue:
-                    if chargerstate == 3:
-                        logging.info("Price is right - But Charging is already in progress")
-                        chargestatus = 1
-                    else:
-                        charger_control(token, charger_id, "toggle_charging")
-                        logging.info("Price is right - Starting charge")
-                        chargestatus = 1
-                elif value > chargevalue:
-                    if chargerstate == 3:
-                        logging.info("Price is too high - Pausing Charge")
-                        charger_control(token, charger_id, "toggle_charging")
-                        chargestatus = 0
-                    else:
-                        logging.info("Price is too high - But charger is already stopped")
-                        chargestatus = 0
+            if value <= chargevalue:
+                if chargerstate == 0:
+                    logging.info("Price is right - But Charger is Offline - Skipping")
+                    chargestatus = 0
+                elif chargerstate == 1:
+                    logging.info("Price is right - But Charger is Disconnected - Skipping")
+                    chargestatus = 0
+                elif chargerstate == 3:
+                    logging.info("Price is right - But Charging is already in progress")
+                    chargestatus = 1
+                elif chargerstate == 4:
+                    logging.info("Price is right - But Charging is Complete - Skipping")
+                    chargestatus = 0
+                else:
+                    charger_control(token, charger_id, "toggle_charging")
+                    logging.info("Price is right - Starting charge")
+                    chargestatus = 1
+            elif value > chargevalue:
+                if chargerstate == 1:
+                    logging.info("Price is too high - But Charger is already Disconnected - Skipping")
+                    chargestatus = 0
+                elif chargerstate == 3:
+                    logging.info("Price is too high - Pausing Charge")
+                    charger_control(token, charger_id, "toggle_charging")
+                    chargestatus = 0
+                else:
+                    logging.info("Price is too high - But charger is already stopped")
+                    chargestatus = 0
             
-            elif chargerstate == 1:
-                logging.info("Charger Disconnected")
-                chargestatus = 0
-
-            elif chargerstate == 5:
-                logging.warning("Charger Error")
-                chargestatus = 0
-            
-            else:
-                logging.info ("Charger not ready")
-                chargestatus = 0
-
     except:
         logging.warning ("File not found!!!")
 
