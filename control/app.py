@@ -26,7 +26,7 @@ def get_token():
         #logging.info("--- Token recieved ---")
         return(data["accessToken"])
     except:
-        #logging.warning("Error getting token")
+        logging.warning("Error getting token")
 
 # Get charger id
 def get_charger(token):
@@ -134,7 +134,7 @@ while __name__ == "__main__":
                     chargestatus = 0
             
     except:
-        #logging.warning ("File not found!!!")
+        logging.warning ("File not found!!!")
 
     # Get all variables and save them in file
     controldata['data'] = []
