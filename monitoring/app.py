@@ -16,13 +16,13 @@ with open ("data/monitoring.json") as jsonfile:
     jsonfile.close()
     for d in data:
         chargevalue = (d['chargevalue'])
-        logging.info("--- Chargevalue recieved from file ---")
-        logging.info(chargevalue)
+        #logging.info("--- Chargevalue recieved from file ---")
+        #logging.info(chargevalue)
 
 # Get Chargevalue input
 chargevalue = st.number_input("Charging will happen at this price or below : ", chargevalue)
-logging.info("--- New Chargevalue input recieved ---")
-logging.info(chargevalue)
+#logging.info("--- New Chargevalue input recieved ---")
+#logging.info(chargevalue)
 
 
 # Get all variables and save them in file
@@ -35,5 +35,5 @@ monitoringdata['data'].append({
 with open("data/monitoring.json", "w") as f:
     json.dump(monitoringdata, f)
 f.close()
-logging.info("--- Saving Chargevalue ---")
-logging.info(chargevalue)
+#logging.info("--- Saving Chargevalue ---")
+#logging.info(chargevalue)
