@@ -23,10 +23,10 @@ def get_token():
     try:
         response = requests.request("POST", url, data=payload, headers=headers)
         data = json.loads(response.text)
-        logging.info("--- Token recieved ---")
+        #logging.info("--- Token recieved ---")
         return(data["accessToken"])
     except:
-        logging.warning("Error getting token")
+        #logging.warning("Error getting token")
 
 # Get charger id
 def get_charger(token):
@@ -35,8 +35,8 @@ def get_charger(token):
     response = requests.request("GET", url, headers=headers)
     data = json.loads(response.text)
     id = data[0]["id"]
-    logging.info("--- Charger ID ---")
-    logging.info(id)
+    #logging.info("--- Charger ID ---")
+    #logging.info(id)
     return(id)
 
 
@@ -45,8 +45,8 @@ def charger_control(token, id, command):
     url = "https://api.easee.cloud/api/chargers/"+ id +"/commands/" + command
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("POST", url, headers=headers)
-    logging.info("--- Charger Reponse ---")
-    logging.info(response.text)
+    #logging.info("--- Charger Reponse ---")
+    #logging.info(response.text)
     return (response)
 
 
@@ -57,15 +57,15 @@ def charger_state(token, id):
     response = requests.request("GET", url, headers=headers)
     data = json.loads(response.text)
     chargerOpMode = data["chargerOpMode"]
-    logging.info("--- chargerOpMode ---")
-    logging.info(chargerOpMode)
+    #logging.info("--- chargerOpMode ---")
+    #logging.info(chargerOpMode)
     return (chargerOpMode)
 
 
 
 while __name__ == "__main__":
     # Set logging Config
-    logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
+    #logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
     
     # Get chargevalue
     try:
@@ -75,11 +75,11 @@ while __name__ == "__main__":
                     jsonfile.close()
                     for d in data:
                         chargevalue = (d['chargevalue'])
-                    logging.info("--- chargevalue ---")
-                    logging.info(chargevalue)
+                    #logging.info("--- chargevalue ---")
+                    #logging.info(chargevalue)
     except:
         chargevalue = 3.0
-        logging.info ("Could not read file with chargevalue - setting to default value")
+        #logging.info ("Could not read file with chargevalue - setting to default value")
 
     # Get token
     token = (get_token())
@@ -95,46 +95,46 @@ while __name__ == "__main__":
 
             for r in result:
                 value = (r['value'])
-                logging.info("Current price   : " + str(value))
+                #logging.info("Current price   : " + str(value))
                 start = (r['start'])
-                logging.info("Start Time      : " + str(start))
+                #logging.info("Start Time      : " + str(start))
                 end = (r['end'])
-                logging.info("End Time        : " + str(end))
+                #logging.info("End Time        : " + str(end))
 
             # Get Charger state
             chargerstate = charger_state(token, charger_id)
             print (chargerstate)
             if value <= chargevalue:
                 if chargerstate == 0:
-                    logging.info("Price is right - But Charger is Offline - Skipping")
+                    #logging.info("Price is right - But Charger is Offline - Skipping")
                     chargestatus = 0
                 elif chargerstate == 1:
-                    logging.info("Price is right - But Charger is Disconnected - Skipping")
+                    #logging.info("Price is right - But Charger is Disconnected - Skipping")
                     chargestatus = 0
                 elif chargerstate == 3:
-                    logging.info("Price is right - But Charging is already in progress")
+                    #logging.info("Price is right - But Charging is already in progress")
                     chargestatus = 1
                 elif chargerstate == 4:
-                    logging.info("Price is right - But Charging is Complete - Skipping")
+                    #logging.info("Price is right - But Charging is Complete - Skipping")
                     chargestatus = 0
                 else:
                     charger_control(token, charger_id, "toggle_charging")
-                    logging.info("Price is right - Starting charge")
+                    #logging.info("Price is right - Starting charge")
                     chargestatus = 1
             elif value > chargevalue:
                 if chargerstate == 1:
-                    logging.info("Price is too high - But Charger is already Disconnected - Skipping")
+                    #logging.info("Price is too high - But Charger is already Disconnected - Skipping")
                     chargestatus = 0
                 elif chargerstate == 3:
-                    logging.info("Price is too high - Pausing Charge")
+                    #logging.info("Price is too high - Pausing Charge")
                     charger_control(token, charger_id, "toggle_charging")
                     chargestatus = 0
                 else:
-                    logging.info("Price is too high - But charger is already stopped")
+                    #logging.info("Price is too high - But charger is already stopped")
                     chargestatus = 0
             
     except:
-        logging.warning ("File not found!!!")
+        #logging.warning ("File not found!!!")
 
     # Get all variables and save them in file
     controldata['data'] = []
