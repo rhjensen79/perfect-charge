@@ -23,7 +23,7 @@ def get_token():
     try:
         response = requests.request("POST", url, data=payload, headers=headers)
         data = json.loads(response.text)
-        logging.info("--- Token recieved ---")
+        #logging.info("--- Token recieved ---")
         return(data["accessToken"])
     except:
         logging.warning("Error getting token")
