@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10
 LABEL maintainer="Robert Jensen - Robert@robert-jensen.dk"
 LABEL org.opencontainers.image.version="0.0.1"
 ENV TZ="Europe/Copenhagen"
