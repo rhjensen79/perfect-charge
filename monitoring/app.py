@@ -3,21 +3,24 @@ import json
 import logging
 
 
-#if __name__ == "__main__":
 st.title("Perfect Charge")
 st.write("This is the perfect charge monitoring/Control page")
     
 
     
-
-with open ("data/monitoring.json") as jsonfile:
-    jsonObject = json.load(jsonfile)
-    data = jsonObject['data']
-    jsonfile.close()
-    for d in data:
-        chargevalue = (d['chargevalue'])
-        #logging.info("--- Chargevalue recieved from file ---")
-        #logging.info(chargevalue)
+try:
+    with open ("data/monitoring.json") as jsonfile:
+        jsonObject = json.load(jsonfile)
+        data = jsonObject['data']
+        jsonfile.close()
+        for d in data:
+            chargevalue = (d['chargevalue'])
+            #logging.info("--- Chargevalue recieved from file ---")
+            #logging.info(chargevalue)
+except:
+    with open("data/monitoring.json", "w") as f:
+        chargevalue = 3.0
+        f.close()
 
 # Get Chargevalue input
 chargevalue = st.number_input("Charging will happen at this price or below : ", chargevalue)
