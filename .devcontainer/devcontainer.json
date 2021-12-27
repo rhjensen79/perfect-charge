@@ -36,7 +36,9 @@
 		"ms-python.python",
 		"ms-python.vscode-pylance",
 		"hediet.vscode-drawio",
-		"ms-kubernetes-tools.vscode-kubernetes-tools"
+		"ms-kubernetes-tools.vscode-kubernetes-tools",
+		"mhutchie.git-graph",
+		"eamodio.gitlens"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
