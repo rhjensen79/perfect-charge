@@ -35,8 +35,8 @@ def get_charger(token):
     response = requests.request("GET", url, headers=headers)
     data = json.loads(response.text)
     id = data[0]["id"]
-    #logging.info("--- Charger ID ---")
-    #logging.info(id)
+    logging.info("--- Charger ID ---")
+    logging.info(id)
     return(id)
 
 
@@ -45,8 +45,8 @@ def charger_control(token, id, command):
     url = "https://api.easee.cloud/api/chargers/"+ id +"/commands/" + command
     headers = {"Authorization": "Bearer "+ token}
     response = requests.request("POST", url, headers=headers)
-    #logging.info("--- Charger Reponse ---")
-    #logging.info(response.text)
+    logging.info("--- Charger Reponse ---")
+    logging.info(response.text)
     return (response)
 
 
@@ -57,8 +57,8 @@ def charger_state(token, id):
     response = requests.request("GET", url, headers=headers)
     data = json.loads(response.text)
     chargerOpMode = data["chargerOpMode"]
-    #logging.info("--- chargerOpMode ---")
-    #logging.info(chargerOpMode)
+    logging.info("--- chargerOpMode ---")
+    logging.info(chargerOpMode)
     return (chargerOpMode)
 
 
