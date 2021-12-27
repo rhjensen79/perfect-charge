@@ -23,7 +23,7 @@ def get_token():
     try:
         response = requests.request("POST", url, data=payload, headers=headers)
         data = json.loads(response.text)
-        #logging.info("--- Token recieved ---")
+        logging.info("--- Token recieved ---")
         return(data["accessToken"])
     except:
         logging.warning("Error getting token")
@@ -65,7 +65,7 @@ def charger_state(token, id):
 
 while __name__ == "__main__":
     # Set logging Config
-    #logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
+    logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S' , level=os.environ.get("LOGLEVEL", "INFO"))
     
     # Get chargevalue
     try:
@@ -103,7 +103,7 @@ while __name__ == "__main__":
 
             # Get Charger state
             chargerstate = charger_state(token, charger_id)
-            print (chargerstate)
+            #print (chargerstate)
             if value <= chargevalue:
                 if chargerstate == 0:
                     #logging.info("Price is right - But Charger is Offline - Skipping")
@@ -151,4 +151,5 @@ while __name__ == "__main__":
 
 
     # Wait 5 minutes for next run
+    logging.info("Waiting 5 minute for next run")
     time.sleep(300)
