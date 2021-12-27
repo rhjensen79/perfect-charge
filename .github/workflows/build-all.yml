@@ -221,7 +221,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
 
-  deploy-app:
+  deploy-app-to-k8s:
     runs-on: ubuntu-latest
     needs: [update-deployment-files]
     steps:
@@ -231,3 +231,11 @@ jobs:
       uses: tailscale/github-action@v1
       with:
         authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+    - name: Set Kubernetes Context
+      uses: azure/k8s-set-context@v2
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    - name: Deploy to Cluster
+      run: |
+        kubectl apply -f k8s/perfect-charge.yaml
