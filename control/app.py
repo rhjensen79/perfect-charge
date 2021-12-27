@@ -75,11 +75,11 @@ while __name__ == "__main__":
                     jsonfile.close()
                     for d in data:
                         chargevalue = (d['chargevalue'])
-                    #logging.info("--- chargevalue ---")
-                    #logging.info(chargevalue)
+                    logging.info("--- chargevalue ---")
+                    logging.info(chargevalue)
     except:
         chargevalue = 3.0
-        #logging.info ("Could not read file with chargevalue - setting to default value")
+        logging.info ("Could not read file with chargevalue - setting to default value")
 
     # Get token
     token = (get_token())
@@ -95,42 +95,42 @@ while __name__ == "__main__":
 
             for r in result:
                 value = (r['value'])
-                #logging.info("Current price   : " + str(value))
+                logging.info("Current price   : " + str(value))
                 start = (r['start'])
-                #logging.info("Start Time      : " + str(start))
+                logging.info("Start Time      : " + str(start))
                 end = (r['end'])
-                #logging.info("End Time        : " + str(end))
+                logging.info("End Time        : " + str(end))
 
             # Get Charger state
             chargerstate = charger_state(token, charger_id)
             #print (chargerstate)
             if value <= chargevalue:
                 if chargerstate == 0:
-                    #logging.info("Price is right - But Charger is Offline - Skipping")
+                    logging.info("Price is right - But Charger is Offline - Skipping")
                     chargestatus = 0
                 elif chargerstate == 1:
-                    #logging.info("Price is right - But Charger is Disconnected - Skipping")
+                    logging.info("Price is right - But Charger is Disconnected - Skipping")
                     chargestatus = 0
                 elif chargerstate == 3:
-                    #logging.info("Price is right - But Charging is already in progress")
+                    logging.info("Price is right - But Charging is already in progress")
                     chargestatus = 1
                 elif chargerstate == 4:
-                    #logging.info("Price is right - But Charging is Complete - Skipping")
+                    logging.info("Price is right - But Charging is Complete - Skipping")
                     chargestatus = 0
                 else:
                     charger_control(token, charger_id, "toggle_charging")
-                    #logging.info("Price is right - Starting charge")
+                    logging.info("Price is right - Starting charge")
                     chargestatus = 1
             elif value > chargevalue:
                 if chargerstate == 1:
-                    #logging.info("Price is too high - But Charger is already Disconnected - Skipping")
+                    logging.info("Price is too high - But Charger is already Disconnected - Skipping")
                     chargestatus = 0
                 elif chargerstate == 3:
-                    #logging.info("Price is too high - Pausing Charge")
+                    logging.info("Price is too high - Pausing Charge")
                     charger_control(token, charger_id, "toggle_charging")
                     chargestatus = 0
                 else:
-                    #logging.info("Price is too high - But charger is already stopped")
+                    logging.info("Price is too high - But charger is already stopped")
                     chargestatus = 0
             
     except:
