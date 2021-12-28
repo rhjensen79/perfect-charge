@@ -44,9 +44,9 @@ def main():
 
 
 
-
+# Run main program
 if __name__ == '__main__':
     try:
         main()
-    except KeyboardInterrupt:
-        print('Interrupted')
+    except:
+        logging.warning('Program ended')
