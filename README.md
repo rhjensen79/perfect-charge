@@ -14,9 +14,9 @@ It could be done more simple, but the secondary purpose of this app, is to use i
 ![image](design.png)
 
 # Installation
-## Env Variables / Secrets
+## Env Variables
 
-The following enviromental variables, need to be set on the container, for it to work.
+The following enviromental variables, need to be set on the container, and the OS from where you are creating the secrets. , for it to work.
 ### Value
 
 - BARRY_METER_ID
@@ -34,5 +34,36 @@ The following enviromental variables, need to be set on the container, for it to
 - GRAFANA_USERNAME
 - GRAFANA_PASSWORD 
 
+## Namespace
 
+The app default to the namespace perfect-charge
+To create it run :
+```
+kubectl create ns perfect-charge
+```
 
+## Secrets
+
+For the app to work, a couple of secrets files, need to be located in the same Namespace, ad the app.
+
+To easesy create them, make sure your local OS has them set already (with correct values), and you have access to the Kubernetes cluster, where you are going to deploy the app, and run the following commands.
+
+```
+kubectl -n perfect-charge  create secret generic barry --from-literal=barry_meter_id=$BARRY_METER_ID --from-literal=barry_token=$BARRY_TOKEN
+
+kubectl -n perfect-charge  create secret generic easee --from-literal=easee_password=$EASEE_PASSWORD --from-literal=easee_user=$EASEE_USER
+
+kubectl -n perfect-charge  create secret generic log --from-literal=grafana_urls=$GRAFANA_URLS --from-literal=grafana_database=$GRAFANA_DATABASE --from-literal=grafana_timeout=$GRAFANA_TIMEOUT --from-literal=grafana_username=$GRAFANA_USERNAME --from-literal=grafana_password=$GRAFANA_PASSWORD
+```
+
+If you make a mistake, it's easy to delete a secret again, with the following command.
+```
+kubectl delete -n perfect-charge secret NameOfSecret
+```
+
+## Deploy
+
+To deploy the app, after the prereq is created, simply run
+```
+kubectl applky -f k8s/perfect-charge-yaml
+```
