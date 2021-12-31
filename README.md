@@ -7,18 +7,23 @@ Design will be based on a multi tier k8s app, as described below.
 ![image](design.png)
 
 
-## Env Variables
+## Env Variables / Secrets
 
 The following enviromental variables, need to be set on the container, for it to work.
 
 
 ### Value
-BARRY METER
-
+exportBARRY_METER_ID
 BARRY_TOKEN
-
-
 ### Control
+EASEE_USER
+EASEE_PASSWORD
 
+### Log
+GRAFANA_URLS
+GRAFANA_DATABASE
+GRAFANA_TIMEOUT
+GRAFANA_USERNAME
+GRAFANA_PASSWORD 
 ### Monitoring
 
