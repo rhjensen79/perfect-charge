@@ -83,6 +83,32 @@ spec:
             requests:
               memory: 256Mi
               cpu: 0.1m
+          env:
+            - name: GRAFANA_URLS 
+              valueFrom:
+                secretKeyRef:
+                  name: log
+                  key: grafana_urls
+            - name: GRAFANA_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: log
+                  key: grafana_database
+            - name: GRAFANA_TIMEOUT
+              valueFrom:
+                secretKeyRef:
+                  name: log
+                  key: grafana_timeout
+            - name: GRAFANA_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: log
+                  key: grafana_username
+            - name: GRAFANA_PASSWORD 
+              valueFrom:
+                secretKeyRef:
+                  name: log
+                  key: grafana_password
           volumeMounts:
             - name: shared-data
               mountPath: /data
