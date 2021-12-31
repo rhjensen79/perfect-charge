@@ -1,4 +1,6 @@
 # Perfect Charge
+
+Note this readme and the app, is still work in progress. So until this line is gone, treat it as such.
 ## Deployment status
 [![Build All Containers](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml) - [![Deploy only](https://github.com/rhjensen79/perfect-charge/actions/workflows/k8s-deploy.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/k8s-deploy.yml)
 
@@ -65,5 +67,5 @@ kubectl delete -n perfect-charge secret NameOfSecret
 
 To deploy the app, after the prereq is created, simply run
 ```
-kubectl applky -f k8s/perfect-charge-yaml
+kubectl apply -f k8s/perfect-charge-yaml
 ```
