@@ -6,7 +6,7 @@ Note this readme and the app, is still work in progress. So until this line is g
 
 ## Description
 
-An app, with the purpose,of getting the price of power from [Barry](https://barry.energy/dk), and then schelduling it on an [Easee](https://easee.com) charger.
+An app, with the purpose,of getting the price of KWH price from [Barry](https://barry.energy/dk), and then schelduling a charge on an [Easee](https://easee.com) charger, when it's below the requested threshold. 
 
 ![Grafana](grafana.png)
 
