@@ -1,8 +1,7 @@
+[![Build All Containers](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml) - [![Deploy only](https://github.com/rhjensen79/perfect-charge/actions/workflows/k8s-deploy.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/k8s-deploy.yml)
 # Perfect Charge
 
 Note this readme and the app, is still work in progress. So until this line is gone, treat it as such.
-## Deployment status
-[![Build All Containers](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml) - [![Deploy only](https://github.com/rhjensen79/perfect-charge/actions/workflows/k8s-deploy.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/k8s-deploy.yml)
 
 ## Description
 
