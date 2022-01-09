@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoicmhqZW5zZW43OSIsInBhc3N3b3JkIjoicGFzc3dvcmQiLCJlbWFpbCI6InJvYmVydEByb2JlcnQtamVuc2VuLmRrIiwiYXV0aCI6ImNtaHFaVzV6Wlc0M09UcHdZWE56ZDI5eVpBPT0ifX19
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: regcred
+  namespace: perfect-charge
+type: kubernetes.io/dockerconfigjson
