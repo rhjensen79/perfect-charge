@@ -22,7 +22,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBE_CONFIG }}
-        context: microk8s
+        context: production
     - name: Deploy to Cluster
       run: |
         kubectl apply -f k8s/perfect-charge.yaml
