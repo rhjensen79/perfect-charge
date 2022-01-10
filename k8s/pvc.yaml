@@ -4,9 +4,8 @@ metadata:
   name: perfect-charge-pvc
   namespace: perfect-charge
 spec:
-  storageClassName: "nfs-client"
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi

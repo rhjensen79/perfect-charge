@@ -17,8 +17,6 @@ spec:
         - name: shared-data
           persistentVolumeClaim:
             claimName: perfect-charge-pvc
-      imagePullSecrets:
-        - name: regcred
       containers:
         - name: value
           image: ghcr.io/rhjensen79/perfect-charge/value:latest
