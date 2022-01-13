@@ -27,6 +27,8 @@ def main():
     logging.info("--- New Chargevalue input recieved ---")
     logging.info(chargevalue)
 
+    # Pause 60 seconds before saving
+    time.sleep(60)
 
     # Get all variables and save them in file
     monitoringdata = {}
