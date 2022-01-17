@@ -18,7 +18,7 @@ spec:
           emptyDir: {}
       containers:
         - name: value
-          image: ghcr.io/rhjensen79/perfect-charge/value:sha-06303cbf3f3687540301bedf92937503b8c2b123
+          image: ghcr.io/rhjensen79/perfect-charge/value:sha-0bfd9905c83c66f207f24ac963210080449f6213
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -46,7 +46,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: control
-          image: ghcr.io/rhjensen79/perfect-charge/control:sha-06303cbf3f3687540301bedf92937503b8c2b123
+          image: ghcr.io/rhjensen79/perfect-charge/control:sha-0bfd9905c83c66f207f24ac963210080449f6213
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -74,7 +74,7 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/data
         - name: log
-          image: ghcr.io/rhjensen79/perfect-charge/log:sha-06303cbf3f3687540301bedf92937503b8c2b123
+          image: ghcr.io/rhjensen79/perfect-charge/log:sha-0bfd9905c83c66f207f24ac963210080449f6213
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -110,7 +110,7 @@ spec:
             - name: shared-data
               mountPath: /data
         - name: monitoring
-          image: ghcr.io/rhjensen79/perfect-charge/monitoring:sha-06303cbf3f3687540301bedf92937503b8c2b123
+          image: ghcr.io/rhjensen79/perfect-charge/monitoring:sha-0bfd9905c83c66f207f24ac963210080449f6213
           imagePullPolicy: IfNotPresent
           resources:
             requests:
