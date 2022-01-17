@@ -15,8 +15,7 @@ spec:
     spec:
       volumes:
         - name: shared-data
-          persistentVolumeClaim:
-            claimName: perfect-charge-pvc
+          emptyDir: {}
       containers:
         - name: value
           image: ghcr.io/rhjensen79/perfect-charge/value:sha-b88bcc63d46e7b758612a8ab8ed8f8ac2611d524
