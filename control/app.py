@@ -78,7 +78,7 @@ while __name__ == "__main__":
                     logging.info("--- chargevalue ---")
                     logging.info(chargevalue)
     except:
-        chargevalue = 3.0
+        chargevalue = 2.5
         logging.info ("Could not read file with chargevalue - setting to default value")
 
     # Get token
