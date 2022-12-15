@@ -1,10 +1,10 @@
 [![Build All Containers](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml)
 
-# Perfect Charge
-
-# !!! Archiving !!!
+# Archiving
 
 Archiving the repo, since Barry is no more, so it's not possible to use the code anymore. Also have a couple of new versions, that work better. Ping me here, if interested  
+
+# Perfect Charge
 
 Note this readme and the app, is still work in progress. So until this line is gone, treat it as such.
 
