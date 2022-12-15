@@ -1,11 +1,14 @@
-[![Build All Containers](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml) 
+[![Build All Containers](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml/badge.svg)](https://github.com/rhjensen79/perfect-charge/actions/workflows/build-all.yml)
+
 # Perfect Charge
+
+### Archiving the repo, since Barry is no more, so it's not possible to use the code anymore. Also have a couple of new versions, that work better. Ping me here, if interested  
 
 Note this readme and the app, is still work in progress. So until this line is gone, treat it as such.
 
 ## Description
 
-An app, with the purpose,of getting the price of KWH price from [Barry](https://barry.energy/dk), and then schelduling a charge on an [Easee](https://easee.com) charger, when it's below the requested threshold. 
+An app, with the purpose,of getting the price of KWH price from [Barry](https://barry.energy/dk), and then schelduling a charge on an [Easee](https://easee.com) charger, when it's below the requested threshold.
 
 ![Grafana](grafana.png)
 
@@ -15,13 +18,16 @@ It could be done more simple, but the secondary purpose of this app, is to use i
 ![image](design.png)
 
 # Installation
+
 ## Env Variables
 
 The following enviromental variables, need to be set on the container, and the OS from where you are creating the secrets. , for it to work.
+
 ### Value
 
 - BARRY_METER_ID
 - BARRY_TOKEN
+
 ### Control
 
 - EASEE_USER
@@ -33,12 +39,13 @@ The following enviromental variables, need to be set on the container, and the O
 - GRAFANA_DATABASE
 - GRAFANA_TIMEOUT
 - GRAFANA_USERNAME
-- GRAFANA_PASSWORD 
+- GRAFANA_PASSWORD
 
 ## Namespace
 
 The app default to the namespace perfect-charge
 To create it run :
+
 ```
 kubectl create ns perfect-charge
 ```
@@ -58,6 +65,7 @@ kubectl -n perfect-charge  create secret generic log --from-literal=grafana_urls
 ```
 
 If you make a mistake, it's easy to delete a secret again, with the following command.
+
 ```
 kubectl delete -n perfect-charge secret NameOfSecret
 ```
@@ -65,6 +73,7 @@ kubectl delete -n perfect-charge secret NameOfSecret
 ## Deploy
 
 To deploy the app, after the prereq is created, simply run
+
 ```
 kubectl apply -f k8s/perfect-charge-yaml
 ```
